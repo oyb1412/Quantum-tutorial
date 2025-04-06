@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6616701073094485809
+--- !u!114 &-7296703313462908789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,49 +9,122 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -585149669, guid: b156eeaae3f741b40af66649a4748430, type: 3}
-  m_Name: DefaultConfigKCC2D
+  m_Script: {fileID: 321274561, guid: b156eeaae3f741b40af66649a4748430, type: 3}
+  m_Name: DefaultConfigNavmeshAgent
   m_EditorClassIdentifier: 
   Identifier:
-    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigKCC2D
+    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigNavmeshAgent
     Guid:
-      Value: 126228091096480917
-  Offset:
-    X:
-      RawValue: 0
-    Y:
-      RawValue: 0
-  Radius:
-    RawValue: 45875
-  MaxPenetration:
-    RawValue: 655
-  PenetrationCorrection:
-    RawValue: 32768
-  Extent:
-    RawValue: 13107
-  MaxContacts: 4
-  LayerMask:
-    BitMask: -1
-  UseManifoldNormal: 0
-  AirControl: 1
-  Acceleration:
-    RawValue: 1638400
-  Braking:
-    RawValue: 655360
-  BaseJumpImpulse:
-    RawValue: 262144
-  MaxSpeed:
-    RawValue: 196608
-  Gravity:
-    X:
-      RawValue: 0
-    Y:
-      RawValue: -655360
-  MaxSlope:
-    RawValue: 3932160
-  MaxSlopeSpeed:
+      Value: 1335123465828849361
+  UpdateInterval: 1
+  PathQuality: 1
+  CachedWaypointCount: 6
+  MaxRepathTimeout:
     RawValue: 327680
---- !u!114 &-1403367949523966322
+  LineOfSightFunneling: 0
+  DynamicLineOfSight: 0
+  DynamicLineOfSightWaypointRange:
+    RawValue: 0
+  AutomaticTargetCorrection: 1
+  AutomaticTargetCorrectionRadius:
+    RawValue: 65536
+  EnableWaypointDetectionAxis: 0
+  WaypointDetectionAxisExtend:
+    RawValue: 32768
+  WaypointDetectionAxisOffset:
+    RawValue: 0
+  DefaultWaypointDetectionDistance:
+    RawValue: 655
+  MovementType: 1
+  VerticalPositioning: 1
+  Speed:
+    RawValue: 229376
+  AngularSpeed:
+    RawValue: 1310720
+  Acceleration:
+    RawValue: 1310720
+  StoppingDistance:
+    RawValue: 655
+  AutoBraking: 0
+  AutoBrakingDistance:
+    RawValue: 32768
+  ClampAgentToNavmesh: 0
+  ClampAgentToNavmeshCorrection:
+    RawValue: 16384
+  AvoidanceType: 2
+  AvoidanceQuality: 3
+  Priority: 50
+  AvoidanceRadius:
+    RawValue: 32768
+  AvoidanceLayer: 0
+  AvoidanceMask:
+    BitMask: -1
+  MaxAvoidanceCandidates: 64
+  ReduceAvoidanceAtWaypoints: 0
+  ReduceAvoidanceFactor:
+    RawValue: 262144
+  AvoidanceCanReduceSpeed: 0
+  ShowDebugAvoidance: 0
+--- !u!114 &-4159476349843298404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2fe2c694564034da0046180c7418fb, type: 3}
+  m_Name: DefaultConfigSystems
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigSystems
+    Guid:
+      Value: 2107891755746949766
+  Entries:
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.CullingSystem2D, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.CullingSystem3D, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.PhysicsSystem2D, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.PhysicsSystem3D, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.NavigationSystem, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.EntityPrototypeSystem, Quantum.Simulation,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.Core.PlayerConnectedSystem, Quantum.Simulation,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+--- !u!114 &-1001712535228739425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +139,7 @@ MonoBehaviour:
   Identifier:
     Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigPhysicsMaterial
     Guid:
-      Value: 716516052799606756
+      Value: 4142529491066120133
   Restitution:
     RawValue: 0
   RestitutionCombineFunction: 3
@@ -75,7 +148,25 @@ MonoBehaviour:
   FrictionDynamic:
     RawValue: 39322
   FrictionCombineFunction: 3
---- !u!114 &-879467825348843011
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a89a4a7ca4e4d6e4698ba1a26ca4eae5, type: 3}
+  m_Name: QuantumDefaultConfigs
+  m_EditorClassIdentifier: 
+  SimulationConfig: {fileID: 2824361254854131808}
+  PhysicsMaterial: {fileID: -1001712535228739425}
+  CharacterController2DConfig: {fileID: 4441281527547242031}
+  CharacterController3DConfig: {fileID: 8997182163947153210}
+  NavMeshAgentConfig: {fileID: -7296703313462908789}
+  SystemsConfig: {fileID: -4159476349843298404}
+--- !u!114 &2824361254854131808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +181,7 @@ MonoBehaviour:
   Identifier:
     Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigSimulation
     Guid:
-      Value: 2843352877634478391
+      Value: 3356687867527694554
   Entities:
     CommitCommandsMode: 0
     DefaultEntityCapacity: 1024
@@ -156,13 +247,13 @@ MonoBehaviour:
     DefaultJointsCapacity: 128
     DefaultPhysicsMaterial:
       Id:
-        Value: 716516052799606756
+        Value: 4142529491066120133
     DefaultCharacterController2D:
       Id:
-        Value: 126228091096480917
+        Value: 1017026726569645557
     DefaultCharacterController3D:
       Id:
-        Value: 2476530425261655446
+        Value: 1808866547598746752
     Layers:
     - Default
     - TransparentFX
@@ -200,7 +291,7 @@ MonoBehaviour:
   Navigation:
     DefaultNavMeshAgent:
       Id:
-        Value: 3567919965888397858
+        Value: 1335123465828849361
     EnableNavigationCallbacks: 0
     HeightThresholdForWaypoints:
       RawValue: 65536
@@ -224,7 +315,7 @@ MonoBehaviour:
   HeapPageShift: 15
   HeapPageCount: 256
   HeapExtraCount: 0
---- !u!114 &11400000
+--- !u!114 &4441281527547242031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,75 +324,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a89a4a7ca4e4d6e4698ba1a26ca4eae5, type: 3}
-  m_Name: QuantumDefaultConfigs
-  m_EditorClassIdentifier: 
-  SimulationConfig: {fileID: -879467825348843011}
-  PhysicsMaterial: {fileID: -1403367949523966322}
-  CharacterController2DConfig: {fileID: -6616701073094485809}
-  CharacterController3DConfig: {fileID: 6788403277539860748}
-  NavMeshAgentConfig: {fileID: 8419715156571510120}
-  SystemsConfig: {fileID: 2066938912424295462}
---- !u!114 &2066938912424295462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2fe2c694564034da0046180c7418fb, type: 3}
-  m_Name: DefaultConfigSystems
+  m_Script: {fileID: -585149669, guid: b156eeaae3f741b40af66649a4748430, type: 3}
+  m_Name: DefaultConfigKCC2D
   m_EditorClassIdentifier: 
   Identifier:
-    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigSystems
+    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigKCC2D
     Guid:
-      Value: 3652429404019319068
-  Entries:
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.CullingSystem2D, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.CullingSystem3D, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.PhysicsSystem2D, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.PhysicsSystem3D, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.NavigationSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.EntityPrototypeSystem, Quantum.Simulation,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.Core.PlayerConnectedSystem, Quantum.Simulation,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
---- !u!114 &6788403277539860748
+      Value: 1017026726569645557
+  Offset:
+    X:
+      RawValue: 0
+    Y:
+      RawValue: 0
+  Radius:
+    RawValue: 45875
+  MaxPenetration:
+    RawValue: 655
+  PenetrationCorrection:
+    RawValue: 32768
+  Extent:
+    RawValue: 13107
+  MaxContacts: 4
+  LayerMask:
+    BitMask: -1
+  UseManifoldNormal: 0
+  AirControl: 1
+  Acceleration:
+    RawValue: 1638400
+  Braking:
+    RawValue: 655360
+  BaseJumpImpulse:
+    RawValue: 262144
+  MaxSpeed:
+    RawValue: 196608
+  Gravity:
+    X:
+      RawValue: 0
+    Y:
+      RawValue: -655360
+  MaxSlope:
+    RawValue: 3932160
+  MaxSlopeSpeed:
+    RawValue: 327680
+--- !u!114 &8997182163947153210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,7 +381,7 @@ MonoBehaviour:
   Identifier:
     Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigKCC3D
     Guid:
-      Value: 2476530425261655446
+      Value: 1808866547598746752
   Offset:
     X:
       RawValue: 0
@@ -356,68 +421,3 @@ MonoBehaviour:
     RawValue: 3932160
   MaxSlopeSpeed:
     RawValue: 327680
---- !u!114 &8419715156571510120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 321274561, guid: b156eeaae3f741b40af66649a4748430, type: 3}
-  m_Name: DefaultConfigNavmeshAgent
-  m_EditorClassIdentifier: 
-  Identifier:
-    Path: QuantumUser/Resources/QuantumDefaultConfigs|DefaultConfigNavmeshAgent
-    Guid:
-      Value: 3567919965888397858
-  UpdateInterval: 1
-  PathQuality: 1
-  CachedWaypointCount: 6
-  MaxRepathTimeout:
-    RawValue: 327680
-  LineOfSightFunneling: 0
-  DynamicLineOfSight: 0
-  DynamicLineOfSightWaypointRange:
-    RawValue: 0
-  AutomaticTargetCorrection: 1
-  AutomaticTargetCorrectionRadius:
-    RawValue: 65536
-  EnableWaypointDetectionAxis: 0
-  WaypointDetectionAxisExtend:
-    RawValue: 32768
-  WaypointDetectionAxisOffset:
-    RawValue: 0
-  DefaultWaypointDetectionDistance:
-    RawValue: 655
-  MovementType: 1
-  VerticalPositioning: 1
-  Speed:
-    RawValue: 229376
-  AngularSpeed:
-    RawValue: 1310720
-  Acceleration:
-    RawValue: 1310720
-  StoppingDistance:
-    RawValue: 655
-  AutoBraking: 0
-  AutoBrakingDistance:
-    RawValue: 32768
-  ClampAgentToNavmesh: 0
-  ClampAgentToNavmeshCorrection:
-    RawValue: 16384
-  AvoidanceType: 2
-  AvoidanceQuality: 3
-  Priority: 50
-  AvoidanceRadius:
-    RawValue: 32768
-  AvoidanceLayer: 0
-  AvoidanceMask:
-    BitMask: -1
-  MaxAvoidanceCandidates: 64
-  ReduceAvoidanceAtWaypoints: 0
-  ReduceAvoidanceFactor:
-    RawValue: 262144
-  AvoidanceCanReduceSpeed: 0
-  ShowDebugAvoidance: 0
