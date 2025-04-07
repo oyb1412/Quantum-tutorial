@@ -1,0 +1,5 @@
+signal OnCollisionProjectileHitPlayer(CollisionInfo2D info, PlayerProjectile* projectile, Player* player);
+
+signal OnCollisionProjectileHitEnemy(CollisionInfo2D info, PlayerProjectile* projectile, EnemysEnemy* enemy);
+
+signal OnCollisionEnemyHitPlayer(CollisionInfo2D info, Player* player, EnemysEnemy* enemy);

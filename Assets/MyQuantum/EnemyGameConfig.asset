@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3c0e4ae1b688c409a0a23106fd6eed, type: 3}
+  m_Name: EnemyGameConfig
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: MyQuantum/EnemyGameConfig
+    Guid:
+      Value: 487659364279297300
+  EnemyPrototype:
+    Id:
+      Value: 1467548297619414207
+  EnemyInitialSpeed:
+    RawValue: 524288
+  EnemyInitialTorqueMin:
+    RawValue: 458752
+  EnemyInitialTorqueMax:
+    RawValue: 1310720
+  EnemySpawnDistanceToCenter:
+    RawValue: 1310720
+  InitialEnemysCount: 5

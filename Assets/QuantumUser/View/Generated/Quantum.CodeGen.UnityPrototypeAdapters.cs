@@ -50,14 +50,16 @@ namespace Quantum.Prototypes.Unity {
   #endif //;
   
   [System.SerializableAttribute()]
-  public unsafe partial class AsteroidsProjectilePrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.AsteroidsProjectilePrototype> {
+  public unsafe partial class PlayerProjectilePrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.PlayerProjectilePrototype> {
     public FP TTL;
     public Quantum.QuantumEntityPrototype Owner;
-    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.AsteroidsProjectilePrototype prototype);
-    public override Quantum.Prototypes.AsteroidsProjectilePrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
-      var result = new Quantum.Prototypes.AsteroidsProjectilePrototype();
+    public AssetRef<PlayerProjectileConfig> ProjectileConfig;
+    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.PlayerProjectilePrototype prototype);
+    public override Quantum.Prototypes.PlayerProjectilePrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
+      var result = new Quantum.Prototypes.PlayerProjectilePrototype();
       converter.Convert(this.TTL, out result.TTL);
       converter.Convert(this.Owner, out result.Owner);
+      converter.Convert(this.ProjectileConfig, out result.ProjectileConfig);
       ConvertUser(converter, ref result);
       return result;
     }

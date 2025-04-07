@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac9bc9fe9adc074d9b66a9a7e6a6f68, type: 3}
+  m_Name: PlayerProjectileConfig
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: MyQuantum/PlayerProjectileConfig
+    Guid:
+      Value: 506151710113272361
+  ProjectileInitialSpeed:
+    RawValue: 1310720
+  ProjectileTTL:
+    RawValue: 131072

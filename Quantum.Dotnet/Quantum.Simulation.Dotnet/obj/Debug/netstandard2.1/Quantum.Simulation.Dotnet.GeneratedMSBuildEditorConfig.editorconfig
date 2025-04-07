@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Quantum
+build_property.ProjectDir = C:\UnityProject\Quantumtutorial\Quantum.Dotnet\Quantum.Simulation.Dotnet\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

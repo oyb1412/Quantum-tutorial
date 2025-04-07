@@ -1,0 +1,8 @@
+component PlayerProjectile
+{
+    FP TTL;
+    EntityRef Owner;
+    AssetRef<PlayerProjectileConfig> ProjectileConfig;
+}
+
+signal PlayerShoot(EntityRef owner, FPVector2 spawnPosition, AssetRef<EntityPrototype> projectilePrototype);

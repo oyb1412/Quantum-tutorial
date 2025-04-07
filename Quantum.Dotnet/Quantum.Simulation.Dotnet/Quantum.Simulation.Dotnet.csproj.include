@@ -1,0 +1,31 @@
+<Project>
+  <!--Properties-->
+  <PropertyGroup>
+    <QuantumCodeGenOutput>..\..\Assets\QuantumUser\Simulation\Generated</QuantumCodeGenOutput>
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  <!--Includes-->
+  <ItemGroup>
+    <None Include="..\..\Assets\MyQuantum\Global.qtn">
+      <Link>MyQuantum/Global.qtn</Link>
+    </None>
+    <None Include="..\..\Assets\MyQuantum\PlayerLink.qtn">
+      <Link>MyQuantum/PlayerLink.qtn</Link>
+    </None>
+    <None Include="..\..\Assets\MyQuantum\Plyaer.qtn">
+      <Link>MyQuantum/Plyaer.qtn</Link>
+    </None>
+    <None Include="..\..\Assets\Photon\QuantumAsteroids\Simulation\Asteroids.qtn">
+      <Link>Photon/QuantumAsteroids/Simulation/Asteroids.qtn</Link>
+    </None>
+    <Compile Include="..\..\Assets\Photon\QuantumAsteroids\Simulation\AsteroidsGameConfig.cs">
+      <Link>Photon/QuantumAsteroids/Simulation/AsteroidsGameConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Photon\QuantumAsteroids\Simulation/**/*.cs" LinkBase="Photon/QuantumAsteroids/Simulation" />
+    <None Include="..\..\Assets\Photon\QuantumAsteroids\Simulation/**/*.qtn" LinkBase="Photon/QuantumAsteroids/Simulation" />
+    <Compile Include="..\..\Assets\QuantumUser\Simulation/**/*.cs" LinkBase="QuantumUser/Simulation" />
+    <None Include="..\..\Assets\QuantumUser\Simulation/**/*.qtn" LinkBase="QuantumUser/Simulation" />
+    <Compile Include="..\..\Assets\Photon\Quantum\Simulation/**/*.cs" LinkBase="Photon/Quantum/Simulation" />
+    <None Include="..\..\Assets\Photon\Quantum\Simulation/**/*.qtn" LinkBase="Photon/Quantum/Simulation" />
+  </ItemGroup>
+</Project>
