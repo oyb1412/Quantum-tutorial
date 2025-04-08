@@ -7,8 +7,7 @@ using UnityEngine;
 using UnityEngine.Scripting;
 
 [Preserve]
-public unsafe class EnemySpawnerSystem : SystemSignalsOnly {
-
+public unsafe class EnemySpawnerSystem : SystemSignalsOnly, ISignalSpawnsEnemy {
     public override void OnInit(Frame f) {
         for(int i = 0; i < 20; i ++) {
             SpawnEnemydWave(f);
@@ -16,13 +15,7 @@ public unsafe class EnemySpawnerSystem : SystemSignalsOnly {
         }
     }
 
-    private void SpawnEnemydWave(Frame f) {
-        //Runner에 등록한 GameConfig를 찾아온다.
-        EnemyManagerConfig config = f.FindAsset(f.RuntimeConfig.EnemyManagerConfig);
-        SpawnEnemy(f, config.EnemyPrototype);
-    }
-
-    public void SpawnEnemy(Frame f, AssetRef<EntityPrototype> childPrototype) {
+    public void SpawnsEnemy(Frame f, AssetRef<EntityPrototype> childPrototype) {
         //애너미 에셋을 불러옴
         EnemyManagerConfig config = f.FindAsset(f.RuntimeConfig.EnemyManagerConfig);
         //Config에 등록한 엔티티 프로토타입을 생성
@@ -30,11 +23,27 @@ public unsafe class EnemySpawnerSystem : SystemSignalsOnly {
         //해당 엔티티의 트랜스폼 정보를 불러옴
         Transform2D* enemyTransform = f.Unsafe.GetPointer<Transform2D>(enemy);
 
+        EnemyComponent* enemyComp = f.Unsafe.GetPointer<EnemyComponent>(enemy);
+
+        enemyComp->EnemyMoveSpeed = f.RNG->Next(1, 3);
+        enemyComp->MaxEnemyHp = enemyComp->CurrentEnemyHp = 10;
+        enemyComp->EnemyAttackSpeed = 2;
+        enemyComp->EnemyAttackTimer = 0;
+        enemyComp->EnemySpawnDistanceToCenter = 18;
+
+
         //트랜스폼 정보로 위치, 회전값 변경
-        enemyTransform->Position = GetRandomEdgePointOnCircle(f, config.EnemySpawnDistanceToCenter);
+        enemyTransform->Position = GetRandomEdgePointOnCircle(f, enemyComp->EnemySpawnDistanceToCenter);
         enemyTransform->Rotation = GetRandomRotation(f);
-        config.EnemyMoveSpeed = f.RNG->Next(2, 5);
     }
+
+    private void SpawnEnemydWave(Frame f) {
+        //Runner에 등록한 GameConfig를 찾아온다.
+        EntityPrototype enemyPrototype = UnityEngine.Resources.Load<EntityPrototype>("Prefabs/EnemyEntityPrototype");
+        SpawnsEnemy(f, enemyPrototype);
+    }
+
+ 
 
     public static FP GetRandomRotation(Frame f) {
         //결정론적인 랜덤 함수

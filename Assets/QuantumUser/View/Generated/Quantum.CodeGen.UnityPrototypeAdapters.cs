@@ -50,6 +50,48 @@ namespace Quantum.Prototypes.Unity {
   #endif //;
   
   [System.SerializableAttribute()]
+  public unsafe partial class EnemyComponentPrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.EnemyComponentPrototype> {
+    public AssetRef<EntityPrototype> AttackBoundPrototype;
+    public FP EnemyMoveSpeed;
+    public Int32 CurrentEnemyHp;
+    public Int32 MaxEnemyHp;
+    public FP EnemyAttackSpeed;
+    public FP EnemyAttackTimer;
+    public FP EnemySpawnDistanceToCenter;
+    public FPVector2 ClosestPlayerPos;
+    public FPVector2 Direction;
+    public Quantum.QEnum32<EnemyState> State;
+    public Quantum.QuantumEntityPrototype PlayerEntity;
+    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.EnemyComponentPrototype prototype);
+    public override Quantum.Prototypes.EnemyComponentPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
+      var result = new Quantum.Prototypes.EnemyComponentPrototype();
+      converter.Convert(this.AttackBoundPrototype, out result.AttackBoundPrototype);
+      converter.Convert(this.EnemyMoveSpeed, out result.EnemyMoveSpeed);
+      converter.Convert(this.CurrentEnemyHp, out result.CurrentEnemyHp);
+      converter.Convert(this.MaxEnemyHp, out result.MaxEnemyHp);
+      converter.Convert(this.EnemyAttackSpeed, out result.EnemyAttackSpeed);
+      converter.Convert(this.EnemyAttackTimer, out result.EnemyAttackTimer);
+      converter.Convert(this.EnemySpawnDistanceToCenter, out result.EnemySpawnDistanceToCenter);
+      converter.Convert(this.ClosestPlayerPos, out result.ClosestPlayerPos);
+      converter.Convert(this.Direction, out result.Direction);
+      converter.Convert(this.State, out result.State);
+      converter.Convert(this.PlayerEntity, out result.PlayerEntity);
+      ConvertUser(converter, ref result);
+      return result;
+    }
+  }
+  [System.SerializableAttribute()]
+  public unsafe partial class PlayerBoundComponentPrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.PlayerBoundComponentPrototype> {
+    public Quantum.QuantumEntityPrototype OwnerPlayer;
+    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.PlayerBoundComponentPrototype prototype);
+    public override Quantum.Prototypes.PlayerBoundComponentPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
+      var result = new Quantum.Prototypes.PlayerBoundComponentPrototype();
+      converter.Convert(this.OwnerPlayer, out result.OwnerPlayer);
+      ConvertUser(converter, ref result);
+      return result;
+    }
+  }
+  [System.SerializableAttribute()]
   public unsafe partial class PlayerProjectilePrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.PlayerProjectilePrototype> {
     public FP TTL;
     public Quantum.QuantumEntityPrototype Owner;

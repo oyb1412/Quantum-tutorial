@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: GameMap
   m_EditorClassIdentifier: 
   Identifier:
-    Path: Asset/GameMap
+    Path: Resources/GameMap
     Guid:
       Value: 352908649149150936
   UserAsset:
     Id:
       Value: 0
-  Scene: 
-  ScenePath: 
-  SceneGuid: 
+  Scene: GameScene
+  ScenePath: Assets/Scene/GameScene.unity
+  SceneGuid: 96d7b8b7bc618e44b8b858875c664956
   WorldSize: 256
   BucketsCount: 16
   BucketsSubdivisions: 8
@@ -32,7 +32,7 @@ MonoBehaviour:
   TriangleMeshCellSize: -1
   StaticColliders3DTrianglesData:
     Id:
-      Value: 0
+      Value: 485322866195140498
   SerializeTrianglesMetadata: 0
   GridSizeX: 64
   GridSizeY: 64
@@ -42,7 +42,7 @@ MonoBehaviour:
   StaticColliders2D: []
   StaticColliders3D: []
   MapEntities: []
-  SerializedTriangleDataUncompressedSize: 0
+  SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2
     RefIds: []

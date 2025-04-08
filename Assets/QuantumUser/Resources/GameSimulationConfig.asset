@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameSimulationConfig
   m_EditorClassIdentifier: 
   Identifier:
-    Path: Asset/GameSimulationConfig
+    Path: QuantumUser/Resources/GameSimulationConfig
     Guid:
       Value: 304013043145933897
   Entities:

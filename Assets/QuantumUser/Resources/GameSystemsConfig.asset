@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameSystemsConfig
   m_EditorClassIdentifier: 
   Identifier:
-    Path: Asset/GameSystemsConfig
+    Path: QuantumUser/Resources/GameSystemsConfig
     Guid:
       Value: 526907178459828833
   Entries:
@@ -76,6 +76,16 @@ MonoBehaviour:
     Children: []
   - SystemType:
       AssemblyQualifiedName: EnemyController, Assembly-CSharp
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: BoundController, Assembly-CSharp
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: CollisionsSystem, Assembly-CSharp
     SystemName: 
     StartDisabled: 0
     Children: []

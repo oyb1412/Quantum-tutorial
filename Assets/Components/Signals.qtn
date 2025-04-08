@@ -1,0 +1,6 @@
+signal OnTriggerPlayerBoundHitEnemy(TriggerInfo2D info, PlayerBoundComponent* playerBound, EnemyComponent* enemy);
+
+signal OnTriggerEnemyBoundHitPlayer(TriggerInfo2D info, EnemyBoundComponent* enemyBound, PlayerComponent* player);
+
+signal SpawnsEnemy(AssetRef<EntityPrototype> childPrototype);
+

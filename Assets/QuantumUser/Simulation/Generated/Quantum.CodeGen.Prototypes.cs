@@ -50,18 +50,66 @@ namespace Quantum.Prototypes {
   #endif //;
   
   [System.SerializableAttribute()]
-  [Quantum.Prototypes.Prototype(typeof(Quantum.EnemyComponent))]
-  public unsafe partial class EnemyComponentPrototype : ComponentPrototype<Quantum.EnemyComponent> {
+  [Quantum.Prototypes.Prototype(typeof(Quantum.BoundLifeTimeComponent))]
+  public unsafe partial class BoundLifeTimeComponentPrototype : ComponentPrototype<Quantum.BoundLifeTimeComponent> {
+    public FP DestroyTime;
+    partial void MaterializeUser(Frame frame, ref Quantum.BoundLifeTimeComponent result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.BoundLifeTimeComponent component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.BoundLifeTimeComponent result, in PrototypeMaterializationContext context = default) {
+        result.DestroyTime = this.DestroyTime;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.EnemyBoundComponent))]
+  public unsafe partial class EnemyBoundComponentPrototype : ComponentPrototype<Quantum.EnemyBoundComponent> {
     [HideInInspector()]
     public Int32 _empty_prototype_dummy_field_;
-    partial void MaterializeUser(Frame frame, ref Quantum.EnemyComponent result, in PrototypeMaterializationContext context);
+    partial void MaterializeUser(Frame frame, ref Quantum.EnemyBoundComponent result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.EnemyBoundComponent component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.EnemyBoundComponent result, in PrototypeMaterializationContext context = default) {
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.EnemyComponent))]
+  public unsafe class EnemyComponentPrototype : ComponentPrototype<Quantum.EnemyComponent> {
+    public AssetRef<EntityPrototype> AttackBoundPrototype;
+    public FP EnemyMoveSpeed;
+    public Int32 CurrentEnemyHp;
+    public Int32 MaxEnemyHp;
+    public FP EnemyAttackSpeed;
+    public FP EnemyAttackTimer;
+    public FP EnemySpawnDistanceToCenter;
+    public FPVector2 ClosestPlayerPos;
+    public FPVector2 Direction;
+    public Quantum.QEnum32<EnemyState> State;
+    public MapEntityId PlayerEntity;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyComponent component = default;
         Materialize((Frame)f, ref component, in context);
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.EnemyComponent result, in PrototypeMaterializationContext context = default) {
-        MaterializeUser(frame, ref result, in context);
+        result.AttackBoundPrototype = this.AttackBoundPrototype;
+        result.EnemyMoveSpeed = this.EnemyMoveSpeed;
+        result.CurrentEnemyHp = this.CurrentEnemyHp;
+        result.MaxEnemyHp = this.MaxEnemyHp;
+        result.EnemyAttackSpeed = this.EnemyAttackSpeed;
+        result.EnemyAttackTimer = this.EnemyAttackTimer;
+        result.EnemySpawnDistanceToCenter = this.EnemySpawnDistanceToCenter;
+        result.ClosestPlayerPos = this.ClosestPlayerPos;
+        result.Direction = this.Direction;
+        result.State = this.State;
+        PrototypeValidator.FindMapEntity(this.PlayerEntity, in context, out result.PlayerEntity);
     }
   }
   [System.SerializableAttribute()]
@@ -86,12 +134,14 @@ namespace Quantum.Prototypes {
     public Button Right;
     public Button Up;
     public Button Down;
+    public Button Attack;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.Left = this.Left;
         result.Right = this.Right;
         result.Up = this.Up;
         result.Down = this.Down;
+        result.Attack = this.Attack;
         MaterializeUser(frame, ref result, in context);
     }
   }
@@ -113,9 +163,31 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerBoundComponent))]
+  public unsafe class PlayerBoundComponentPrototype : ComponentPrototype<Quantum.PlayerBoundComponent> {
+    public MapEntityId OwnerPlayer;
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.PlayerBoundComponent component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.PlayerBoundComponent result, in PrototypeMaterializationContext context = default) {
+        PrototypeValidator.FindMapEntity(this.OwnerPlayer, in context, out result.OwnerPlayer);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerComponent))]
   public unsafe partial class PlayerComponentPrototype : ComponentPrototype<Quantum.PlayerComponent> {
+    public AssetRef<EntityPrototype> AttackBoundPrototype;
     public PlayerRef PlayerRef;
+    public FP PlayerMoveSpeed;
+    public Int32 KillCount;
+    public Int32 CurrentPlayerHp;
+    public Int32 MaxPlayerHp;
+    public FP PlayerAttackSpeed;
+    public FP PlayerAttackTimer;
+    public FPVector2 PlayerDirection;
+    public FPVector2 PlayerLastDirection;
     partial void MaterializeUser(Frame frame, ref Quantum.PlayerComponent result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.PlayerComponent component = default;
@@ -123,7 +195,16 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.PlayerComponent result, in PrototypeMaterializationContext context = default) {
+        result.AttackBoundPrototype = this.AttackBoundPrototype;
         result.PlayerRef = this.PlayerRef;
+        result.PlayerMoveSpeed = this.PlayerMoveSpeed;
+        result.KillCount = this.KillCount;
+        result.CurrentPlayerHp = this.CurrentPlayerHp;
+        result.MaxPlayerHp = this.MaxPlayerHp;
+        result.PlayerAttackSpeed = this.PlayerAttackSpeed;
+        result.PlayerAttackTimer = this.PlayerAttackTimer;
+        result.PlayerDirection = this.PlayerDirection;
+        result.PlayerLastDirection = this.PlayerLastDirection;
         MaterializeUser(frame, ref result, in context);
     }
   }

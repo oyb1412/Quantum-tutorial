@@ -1,4 +1,13 @@
 component PlayerComponent
 {
+	asset_ref<EntityPrototype> AttackBoundPrototype;
 	player_ref PlayerRef;
+	FP PlayerMoveSpeed;
+	int KillCount;
+	int CurrentPlayerHp;
+    int MaxPlayerHp;
+    FP PlayerAttackSpeed;
+    FP PlayerAttackTimer;
+	FPVector2 PlayerDirection;
+	FPVector2 PlayerLastDirection;
 }

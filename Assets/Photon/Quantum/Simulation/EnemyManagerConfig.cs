@@ -8,11 +8,4 @@ public class EnemyManagerConfig : AssetObject {
     [Tooltip("Prototype reference to spawn Enemys")]
     //유니티의 에셋을 시뮬레이션에서 참조하기 위해 AssetRef를 사용
     public AssetRef<EntityPrototype> EnemyPrototype;
-    public FP EnemyMoveSpeed = 8;
-    public int CurrentEnemyHp = 10;
-    public int MaxEnemyHp = 10;
-    public FP EnemyAttackSpeed = 1;
-    public FP EnemyAttackTimer = 0;
-    public FP EnemySpawnDistanceToCenter = 20;
-
 }

@@ -1,1 +1,13 @@
-component EnemyComponent{}
+component EnemyComponent{
+	asset_ref<EntityPrototype> AttackBoundPrototype;
+	FP EnemyMoveSpeed;
+    int CurrentEnemyHp;
+    int MaxEnemyHp;
+    FP EnemyAttackSpeed;
+    FP EnemyAttackTimer;
+    FP EnemySpawnDistanceToCenter;
+	FPVector2 ClosestPlayerPos;
+    FPVector2 Direction;
+    EnemyState State;
+    EntityRef PlayerEntity;
+}

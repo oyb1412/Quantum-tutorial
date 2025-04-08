@@ -4,4 +4,5 @@ input
 	button Right;
 	button Up;
 	button Down;
+	button Attack;
 }

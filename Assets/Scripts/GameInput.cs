@@ -1,6 +1,7 @@
 using Photon.Deterministic;
 using Quantum;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class GameInput : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class GameInput : MonoBehaviour
         i.Right = UnityEngine.Input.GetKey(KeyCode.D) || UnityEngine.Input.GetKey(KeyCode.RightArrow);
         i.Up = UnityEngine.Input.GetKey(KeyCode.W) || UnityEngine.Input.GetKey(KeyCode.UpArrow);
         i.Down = UnityEngine.Input.GetKey(KeyCode.S) || UnityEngine.Input.GetKey(KeyCode.DownArrow);
+        i.Attack = UnityEngine.Input.GetKey(KeyCode.Space);
 
+        Debug.Log($"입력 요청된 슬롯 : {callback.PlayerSlot}");
         callback.SetInput(i, DeterministicInputFlags.Repeatable);
     }
 }

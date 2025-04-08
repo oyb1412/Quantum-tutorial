@@ -7,6 +7,6 @@ namespace Quantum {
         public AssetRef<PlayerConfig> PlayerGameConfig;
         public AssetRef<PlayerProjectileConfig> PlayerProjectileGameConfig;
 
-    public AssetRef<EnemyManagerConfig> EnemyManagerConfig;
+        public AssetRef<EnemyManagerConfig> EnemyManagerConfig;
     }
 }
