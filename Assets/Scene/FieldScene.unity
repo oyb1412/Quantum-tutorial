@@ -546,7 +546,7 @@ MonoBehaviour:
       Id:
         Value: 269192931456128705
   UseRandomSeed: 0
-  SessionConfig: {fileID: 0}
+  SessionConfig: {fileID: 11400000, guid: ae9ae7b51d947dc47ad954ccc304983c, type: 2}
   LocalPlayers:
   - PlayerAvatar:
       Id:

@@ -10,4 +10,7 @@ component PlayerComponent
     FP PlayerAttackTimer;
 	FPVector2 PlayerDirection;
 	FPVector2 PlayerLastDirection;
+	PlayerState State;
+	FP NotInputTimer;
+    EntityRef TargetEnemyEntity;
 }

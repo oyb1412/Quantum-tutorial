@@ -1,0 +1,33 @@
+현재 발생한 이슈
+1.샘플에서 제공하는 매치메이킹 시스템도 실행이 불가능
+-플러그인 매니저 오류(PluginManager initialization failed) 발생
+
+-private static EnterRoomArgs BuildEnterRoomArgs(this MatchmakingArguments arguments)
+        {
+            return new EnterRoomArgs
+            {
+                RoomName = arguments.RoomName,
+                Lobby = arguments.Lobby,
+                Ticket = arguments.Ticket,
+                ExpectedUsers = arguments.ExpectedUsers,
+                RoomOptions = arguments.CustomRoomOptions ?? new RoomOptions()
+                {
+                    MaxPlayers = (byte)arguments.MaxPlayers,
+                    IsOpen = arguments.IsRoomOpen.HasValue ? arguments.IsRoomOpen.Value : true,
+                    IsVisible = arguments.IsRoomVisible.HasValue ? arguments.IsRoomVisible.Value : true,
+                    DeleteNullProperties = true,
+                    PlayerTtl = arguments.PlayerTtlInSeconds * 1000,
+                    EmptyRoomTtl = arguments.EmptyRoomTtlInSeconds * 1000,
+                    Plugins = arguments.Plugins,
+                    SuppressRoomEvents = false,
+                    SuppressPlayerInfo = false,
+                    PublishUserId = true,
+                    CustomRoomProperties = arguments.CustomProperties,
+                    CustomRoomPropertiesForLobby = arguments.CustomLobbyProperties,
+                }
+            };
+        }
+방 생성 시 Plugins쪽이 문제라고 생각되는대, Plusins 설정을 하지 않고 default 상태로 초기화 시 
+QuantumRunner이 작동하지 않음(isRunning가 false)
+
+-샘플 코드 및 직접 제작한 코드에서도 동일한 문제가 반복되는 것으로 볼 때 코드 문제라기보단 환경 / 세팅 / 대시보드 쪽 문제라고 사료됨

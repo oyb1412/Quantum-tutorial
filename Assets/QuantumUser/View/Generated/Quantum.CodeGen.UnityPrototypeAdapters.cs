@@ -61,7 +61,7 @@ namespace Quantum.Prototypes.Unity {
     public FPVector2 ClosestPlayerPos;
     public FPVector2 Direction;
     public Quantum.QEnum32<EnemyState> State;
-    public Quantum.QuantumEntityPrototype PlayerEntity;
+    public Quantum.QuantumEntityPrototype TargetPlayerEntity;
     partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.EnemyComponentPrototype prototype);
     public override Quantum.Prototypes.EnemyComponentPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
       var result = new Quantum.Prototypes.EnemyComponentPrototype();
@@ -75,7 +75,7 @@ namespace Quantum.Prototypes.Unity {
       converter.Convert(this.ClosestPlayerPos, out result.ClosestPlayerPos);
       converter.Convert(this.Direction, out result.Direction);
       converter.Convert(this.State, out result.State);
-      converter.Convert(this.PlayerEntity, out result.PlayerEntity);
+      converter.Convert(this.TargetPlayerEntity, out result.TargetPlayerEntity);
       ConvertUser(converter, ref result);
       return result;
     }
@@ -87,6 +87,41 @@ namespace Quantum.Prototypes.Unity {
     public override Quantum.Prototypes.PlayerBoundComponentPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
       var result = new Quantum.Prototypes.PlayerBoundComponentPrototype();
       converter.Convert(this.OwnerPlayer, out result.OwnerPlayer);
+      ConvertUser(converter, ref result);
+      return result;
+    }
+  }
+  [System.SerializableAttribute()]
+  public unsafe partial class PlayerComponentPrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.PlayerComponentPrototype> {
+    public AssetRef<EntityPrototype> AttackBoundPrototype;
+    public PlayerRef PlayerRef;
+    public FP PlayerMoveSpeed;
+    public Int32 KillCount;
+    public Int32 CurrentPlayerHp;
+    public Int32 MaxPlayerHp;
+    public FP PlayerAttackSpeed;
+    public FP PlayerAttackTimer;
+    public FPVector2 PlayerDirection;
+    public FPVector2 PlayerLastDirection;
+    public Quantum.QEnum32<PlayerState> State;
+    public FP NotInputTimer;
+    public Quantum.QuantumEntityPrototype TargetEnemyEntity;
+    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.PlayerComponentPrototype prototype);
+    public override Quantum.Prototypes.PlayerComponentPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
+      var result = new Quantum.Prototypes.PlayerComponentPrototype();
+      converter.Convert(this.AttackBoundPrototype, out result.AttackBoundPrototype);
+      converter.Convert(this.PlayerRef, out result.PlayerRef);
+      converter.Convert(this.PlayerMoveSpeed, out result.PlayerMoveSpeed);
+      converter.Convert(this.KillCount, out result.KillCount);
+      converter.Convert(this.CurrentPlayerHp, out result.CurrentPlayerHp);
+      converter.Convert(this.MaxPlayerHp, out result.MaxPlayerHp);
+      converter.Convert(this.PlayerAttackSpeed, out result.PlayerAttackSpeed);
+      converter.Convert(this.PlayerAttackTimer, out result.PlayerAttackTimer);
+      converter.Convert(this.PlayerDirection, out result.PlayerDirection);
+      converter.Convert(this.PlayerLastDirection, out result.PlayerLastDirection);
+      converter.Convert(this.State, out result.State);
+      converter.Convert(this.NotInputTimer, out result.NotInputTimer);
+      converter.Convert(this.TargetEnemyEntity, out result.TargetEnemyEntity);
       ConvertUser(converter, ref result);
       return result;
     }

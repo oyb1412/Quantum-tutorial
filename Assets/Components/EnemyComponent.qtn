@@ -9,5 +9,5 @@ component EnemyComponent{
 	FPVector2 ClosestPlayerPos;
     FPVector2 Direction;
     EnemyState State;
-    EntityRef PlayerEntity;
+    EntityRef TargetPlayerEntity;
 }

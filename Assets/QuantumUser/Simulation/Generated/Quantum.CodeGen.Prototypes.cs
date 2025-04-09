@@ -92,7 +92,7 @@ namespace Quantum.Prototypes {
     public FPVector2 ClosestPlayerPos;
     public FPVector2 Direction;
     public Quantum.QEnum32<EnemyState> State;
-    public MapEntityId PlayerEntity;
+    public MapEntityId TargetPlayerEntity;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyComponent component = default;
         Materialize((Frame)f, ref component, in context);
@@ -109,7 +109,7 @@ namespace Quantum.Prototypes {
         result.ClosestPlayerPos = this.ClosestPlayerPos;
         result.Direction = this.Direction;
         result.State = this.State;
-        PrototypeValidator.FindMapEntity(this.PlayerEntity, in context, out result.PlayerEntity);
+        PrototypeValidator.FindMapEntity(this.TargetPlayerEntity, in context, out result.TargetPlayerEntity);
     }
   }
   [System.SerializableAttribute()]
@@ -177,7 +177,7 @@ namespace Quantum.Prototypes {
   }
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.PlayerComponent))]
-  public unsafe partial class PlayerComponentPrototype : ComponentPrototype<Quantum.PlayerComponent> {
+  public unsafe class PlayerComponentPrototype : ComponentPrototype<Quantum.PlayerComponent> {
     public AssetRef<EntityPrototype> AttackBoundPrototype;
     public PlayerRef PlayerRef;
     public FP PlayerMoveSpeed;
@@ -188,7 +188,9 @@ namespace Quantum.Prototypes {
     public FP PlayerAttackTimer;
     public FPVector2 PlayerDirection;
     public FPVector2 PlayerLastDirection;
-    partial void MaterializeUser(Frame frame, ref Quantum.PlayerComponent result, in PrototypeMaterializationContext context);
+    public Quantum.QEnum32<PlayerState> State;
+    public FP NotInputTimer;
+    public MapEntityId TargetEnemyEntity;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.PlayerComponent component = default;
         Materialize((Frame)f, ref component, in context);
@@ -205,7 +207,9 @@ namespace Quantum.Prototypes {
         result.PlayerAttackTimer = this.PlayerAttackTimer;
         result.PlayerDirection = this.PlayerDirection;
         result.PlayerLastDirection = this.PlayerLastDirection;
-        MaterializeUser(frame, ref result, in context);
+        result.State = this.State;
+        result.NotInputTimer = this.NotInputTimer;
+        PrototypeValidator.FindMapEntity(this.TargetEnemyEntity, in context, out result.TargetEnemyEntity);
     }
   }
   [System.SerializableAttribute()]

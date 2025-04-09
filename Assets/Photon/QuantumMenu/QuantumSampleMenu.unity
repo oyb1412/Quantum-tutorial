@@ -455,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 7243461719588803421, guid: 7d78f8a9ae2bcc1408312ef78f87bdf0, type: 3}
       propertyPath: _config
       value: 
-      objectReference: {fileID: 11400000, guid: 12a7b15ea36bce843ac6c61b635f6534, type: 2}
+      objectReference: {fileID: 11400000, guid: af9d1ab8d14d86c408aa8900a6733672, type: 2}
     - target: {fileID: 7243461719588803421, guid: 7d78f8a9ae2bcc1408312ef78f87bdf0, type: 3}
       propertyPath: ConnectArgs.SessionConfig
       value: 
@@ -490,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7243461719588803421, guid: 7d78f8a9ae2bcc1408312ef78f87bdf0, type: 3}
       propertyPath: ConnectArgs.RuntimePlayers.Array.data[0].PlayerAvatar.Id.Value
-      value: 1408538595398541088
+      value: 1451322891195809499
       objectReference: {fileID: 0}
     - target: {fileID: 7545343568668095747, guid: 7d78f8a9ae2bcc1408312ef78f87bdf0, type: 3}
       propertyPath: m_Pivot.x

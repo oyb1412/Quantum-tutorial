@@ -54,6 +54,10 @@ namespace Quantum {
     Attack,
     AttackWait,
   }
+  public enum PlayerState : int {
+    ControlMode,
+    FreeMode,
+  }
   [System.FlagsAttribute()]
   public enum InputButtons : int {
     Left = 1 << 0,
@@ -723,7 +727,7 @@ namespace Quantum {
     [FieldOffset(0)]
     public EnemyState State;
     [FieldOffset(24)]
-    public EntityRef PlayerEntity;
+    public EntityRef TargetPlayerEntity;
     public override Int32 GetHashCode() {
       unchecked { 
         var hash = 8831;
@@ -737,7 +741,7 @@ namespace Quantum {
         hash = hash * 31 + ClosestPlayerPos.GetHashCode();
         hash = hash * 31 + Direction.GetHashCode();
         hash = hash * 31 + (Int32)State;
-        hash = hash * 31 + PlayerEntity.GetHashCode();
+        hash = hash * 31 + TargetPlayerEntity.GetHashCode();
         return hash;
       }
     }
@@ -747,7 +751,7 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->CurrentEnemyHp);
         serializer.Stream.Serialize(&p->MaxEnemyHp);
         AssetRef.Serialize(&p->AttackBoundPrototype, serializer);
-        EntityRef.Serialize(&p->PlayerEntity, serializer);
+        EntityRef.Serialize(&p->TargetPlayerEntity, serializer);
         FP.Serialize(&p->EnemyAttackSpeed, serializer);
         FP.Serialize(&p->EnemyAttackTimer, serializer);
         FP.Serialize(&p->EnemyMoveSpeed, serializer);
@@ -816,13 +820,13 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct PlayerComponent : Quantum.IComponent {
-    public const Int32 SIZE = 80;
+    public const Int32 SIZE = 104;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(16)]
+    [FieldOffset(24)]
     public AssetRef<EntityPrototype> AttackBoundPrototype;
     [FieldOffset(12)]
     public PlayerRef PlayerRef;
-    [FieldOffset(40)]
+    [FieldOffset(64)]
     public FP PlayerMoveSpeed;
     [FieldOffset(4)]
     public Int32 KillCount;
@@ -830,14 +834,20 @@ namespace Quantum {
     public Int32 CurrentPlayerHp;
     [FieldOffset(8)]
     public Int32 MaxPlayerHp;
-    [FieldOffset(24)]
-    public FP PlayerAttackSpeed;
-    [FieldOffset(32)]
-    public FP PlayerAttackTimer;
     [FieldOffset(48)]
+    public FP PlayerAttackSpeed;
+    [FieldOffset(56)]
+    public FP PlayerAttackTimer;
+    [FieldOffset(72)]
     public FPVector2 PlayerDirection;
-    [FieldOffset(64)]
+    [FieldOffset(88)]
     public FPVector2 PlayerLastDirection;
+    [FieldOffset(16)]
+    public PlayerState State;
+    [FieldOffset(40)]
+    public FP NotInputTimer;
+    [FieldOffset(32)]
+    public EntityRef TargetEnemyEntity;
     public override Int32 GetHashCode() {
       unchecked { 
         var hash = 3631;
@@ -851,6 +861,9 @@ namespace Quantum {
         hash = hash * 31 + PlayerAttackTimer.GetHashCode();
         hash = hash * 31 + PlayerDirection.GetHashCode();
         hash = hash * 31 + PlayerLastDirection.GetHashCode();
+        hash = hash * 31 + (Int32)State;
+        hash = hash * 31 + NotInputTimer.GetHashCode();
+        hash = hash * 31 + TargetEnemyEntity.GetHashCode();
         return hash;
       }
     }
@@ -860,7 +873,10 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->KillCount);
         serializer.Stream.Serialize(&p->MaxPlayerHp);
         PlayerRef.Serialize(&p->PlayerRef, serializer);
+        serializer.Stream.Serialize((Int32*)&p->State);
         AssetRef.Serialize(&p->AttackBoundPrototype, serializer);
+        EntityRef.Serialize(&p->TargetEnemyEntity, serializer);
+        FP.Serialize(&p->NotInputTimer, serializer);
         FP.Serialize(&p->PlayerAttackSpeed, serializer);
         FP.Serialize(&p->PlayerAttackTimer, serializer);
         FP.Serialize(&p->PlayerMoveSpeed, serializer);
@@ -1206,6 +1222,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum.PlayerLink), Quantum.PlayerLink.SIZE);
       typeRegistry.Register(typeof(Quantum.PlayerProjectile), Quantum.PlayerProjectile.SIZE);
       typeRegistry.Register(typeof(PlayerRef), PlayerRef.SIZE);
+      typeRegistry.Register(typeof(Quantum.PlayerState), 4);
       typeRegistry.Register(typeof(Ptr), Ptr.SIZE);
       typeRegistry.Register(typeof(QBoolean), QBoolean.SIZE);
       typeRegistry.Register(typeof(Quantum.Ptr), Quantum.Ptr.SIZE);
@@ -1241,6 +1258,7 @@ namespace Quantum {
       FramePrinter.EnsurePrimitiveNotStripped<CallbackFlags>();
       FramePrinter.EnsurePrimitiveNotStripped<Quantum.EnemyState>();
       FramePrinter.EnsurePrimitiveNotStripped<Quantum.InputButtons>();
+      FramePrinter.EnsurePrimitiveNotStripped<Quantum.PlayerState>();
       FramePrinter.EnsurePrimitiveNotStripped<QueryOptions>();
     }
   }

@@ -14,42 +14,46 @@ public unsafe class EnemyController : SystemMainThreadFilter<EnemyController.Fil
         public EnemyComponent* Enemy;
     }
     public override void Update(Frame f, ref Filter filter) {
+        EnemyStateMachine(f, ref filter);
+    }
+
+    private void EnemyStateMachine(Frame f, ref Filter filter) {
         switch (filter.Enemy->State) {
             case EnemyState.Move:
                 UpdateState(f, ref filter);
                 UpdateMovement(f, ref filter);
-            break;
+                break;
 
             case EnemyState.AttackWait:
                 UpdateAttackWait(f, ref filter);
-            break;
+                break;
 
             case EnemyState.Attack:
                 UpdateAttack(f, ref filter);
-            break;
+                break;
         }
     }
 
     private void UpdateState(Frame f, ref Filter filter) {
         FP minDistanceSq = FP.UseableMax;
-        filter.Enemy->PlayerEntity = default;
+        filter.Enemy->TargetPlayerEntity = default;
         for (int i = 0; i < f.Global->PlayerCount; i++) {
 
             switch (i) {
                 case 0:
-                    filter.Enemy->PlayerEntity = f.Global->PlayerList0;
+                    filter.Enemy->TargetPlayerEntity = f.Global->PlayerList0;
                     break;
                 case 1:
-                    filter.Enemy->PlayerEntity = f.Global->PlayerList1;
+                    filter.Enemy->TargetPlayerEntity = f.Global->PlayerList1;
                     break;
             }
 
-            if (filter.Enemy->PlayerEntity == default)
+            if (filter.Enemy->TargetPlayerEntity == default)
                 return;
 
             filter.Enemy->ClosestPlayerPos = FPVector2.Zero;
 
-            if (f.Unsafe.TryGetPointer<Transform2D>(filter.Enemy->PlayerEntity, out var playerTransform)) {
+            if (f.Unsafe.TryGetPointer<Transform2D>(filter.Enemy->TargetPlayerEntity, out var playerTransform)) {
                 FPVector2 toPlayer = playerTransform->Position - filter.Transform->Position;
                 FP distanceSq = toPlayer.Magnitude;
 
@@ -66,7 +70,7 @@ public unsafe class EnemyController : SystemMainThreadFilter<EnemyController.Fil
         }
     }
     private void UpdateMovement(Frame f, ref Filter filter) {
-        if (filter.Enemy->PlayerEntity == default)
+        if (filter.Enemy->TargetPlayerEntity == default)
             return;
 
         FPVector2 direction = (filter.Enemy->ClosestPlayerPos - filter.Transform->Position).Normalized;
