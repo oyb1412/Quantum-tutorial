@@ -582,8 +582,10 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 1008;
+    public const Int32 SIZE = 992;
     public const Int32 ALIGNMENT = 8;
+    [FieldOffset(988)]
+    private fixed Byte _alignment_padding_[4];
     [FieldOffset(0)]
     public AssetRef<Map> Map;
     [FieldOffset(8)]
@@ -613,10 +615,6 @@ namespace Quantum {
     public Int32 EnemyCount;
     [FieldOffset(984)]
     public Int32 PlayerCount;
-    [FieldOffset(992)]
-    public EntityRef PlayerList0;
-    [FieldOffset(1000)]
-    public EntityRef PlayerList1;
     [FieldOffset(980)]
     public Int32 EnemyWaveCount;
     public FixedArray<Input> input {
@@ -641,8 +639,6 @@ namespace Quantum {
         hash = hash * 31 + PlayerLastConnectionState.GetHashCode();
         hash = hash * 31 + EnemyCount.GetHashCode();
         hash = hash * 31 + PlayerCount.GetHashCode();
-        hash = hash * 31 + PlayerList0.GetHashCode();
-        hash = hash * 31 + PlayerList1.GetHashCode();
         hash = hash * 31 + EnemyWaveCount.GetHashCode();
         return hash;
       }
@@ -664,8 +660,6 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->EnemyCount);
         serializer.Stream.Serialize(&p->EnemyWaveCount);
         serializer.Stream.Serialize(&p->PlayerCount);
-        EntityRef.Serialize(&p->PlayerList0, serializer);
-        EntityRef.Serialize(&p->PlayerList1, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -950,7 +944,7 @@ namespace Quantum {
     void OnTriggerEnemyBoundHitPlayer(Frame f, TriggerInfo2D info, EnemyBoundComponent* enemyBound, PlayerComponent* player);
   }
   public unsafe partial interface ISignalSpawnsEnemy : ISignal {
-    void SpawnsEnemy(Frame f, AssetRef<EntityPrototype> childPrototype);
+    void SpawnsEnemy(Frame f);
   }
   public static unsafe partial class Constants {
   }
@@ -1127,12 +1121,12 @@ namespace Quantum {
           }
         }
       }
-      public void SpawnsEnemy(AssetRef<EntityPrototype> childPrototype) {
+      public void SpawnsEnemy() {
         var array = _f._ISignalSpawnsEnemySystems;
         for (Int32 i = 0; i < array.Length; ++i) {
           var s = array[i];
           if (_f.SystemIsEnabledInHierarchy((SystemBase)s)) {
-            s.SpawnsEnemy(_f, childPrototype);
+            s.SpawnsEnemy(_f);
           }
         }
       }

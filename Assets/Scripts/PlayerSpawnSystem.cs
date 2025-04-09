@@ -11,11 +11,6 @@ public unsafe class PlayerSpawnSystem : SystemSignalsOnly, ISignalOnPlayerAdded 
 
         frame.Add(playerEntity, new PlayerComponent { PlayerRef = player });
 
-        if (frame.Global->PlayerCount == 0)
-            frame.Global->PlayerList0 = playerEntity;
-        else
-            frame.Global->PlayerList1 = playerEntity;
-
         frame.Global->PlayerCount++;
     }
 }

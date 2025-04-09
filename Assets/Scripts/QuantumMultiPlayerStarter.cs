@@ -1,28 +1,22 @@
-using ExitGames.Client.Photon;
 using Photon.Client;
 using Photon.Deterministic;
 using Photon.Realtime;
 using Quantum;
-using Quantum.Prototypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenuUI : MonoBehaviour, IConnectionCallbacks, ILobbyCallbacks, IMatchmakingCallbacks, IInRoomCallbacks
+public class QuantumMultiPlayerStarter : MonoBehaviour, IConnectionCallbacks, ILobbyCallbacks, IMatchmakingCallbacks, IInRoomCallbacks
 {
     [SerializeField] private UnityEngine.UI.Button startButton;
-    [SerializeField] private GameObject loadingPanel;
     private RealtimeClient client;
     private long mapGuid = 0L;
 
 
     private void Start() {
-        //startButton.onClick.AddListener(() => StartSingleGame());
         startButton.onClick.AddListener(() => OnQuickPlayClicked());
     }
 
@@ -33,7 +27,6 @@ public class MainMenuUI : MonoBehaviour, IConnectionCallbacks, ILobbyCallbacks, 
     public void OnQuickPlayClicked() {
         ConnectToMaster();
     }
-
    
 
     private bool ConnectToMaster() {
@@ -55,7 +48,6 @@ public class MainMenuUI : MonoBehaviour, IConnectionCallbacks, ILobbyCallbacks, 
 
         Debug.Log($"attempting to connect to region {appSetting.FixedRegion}");
         startButton.gameObject.SetActive(false);
-        loadingPanel.SetActive(true);
         return true;
     }
 
@@ -68,46 +60,6 @@ public class MainMenuUI : MonoBehaviour, IConnectionCallbacks, ILobbyCallbacks, 
     public void OnJoinedLobby() {
         Debug.Log("OnJoinedLobby");
     }
-
-    private void StartSingleGame() {
-        var map = UnityEngine.Resources.Load<Map>("QuantumMap");
-        var simulationConfig = UnityEngine.Resources.Load<SimulationConfig>("GameSimulationConfig");
-        var systemConfig = UnityEngine.Resources.Load<SystemsConfig>("GameSystemsConfig");
-
-        var runtimeConfig = new RuntimeConfig();
-        runtimeConfig.Map.Id = map.Guid;
-        runtimeConfig.SimulationConfig = simulationConfig;
-        runtimeConfig.SystemsConfig = systemConfig;
-
-        var playerPorototype = Resources.Load<EntityPrototype>("Prefabs/PlayerEntityPrototype");
-
-        var playerData = new RuntimePlayer {
-            PlayerAvatar = playerPorototype.Guid,
-            PlayerNickname = client.LocalPlayer.NickName
-        };
-
-        var config = QuantumDeterministicSessionConfigAsset.Instance.Config;
-        config.PlayerCount = 1;
-
-        var startParams = new SessionRunner.Arguments {
-            FrameData = null,
-            RuntimeConfig = runtimeConfig,
-            RecordingFlags = RecordingFlags.None,
-            SessionConfig = config,
-            Communicator = null,
-            GameMode = DeterministicGameMode.Local,
-            PlayerCount = 1,
-        };
-
-        QuantumRunner.StartGame(startParams);
-
-        Debug.Log($"QuantumRunner created: {QuantumRunner.Default != null}");
-        Debug.Log($"QuantumRunner running? {QuantumRunner.Default?.IsRunning}");
-
-
-        StartCoroutine(WaitAndLoadScene(playerData));
-    }
-
     private void StartGame() {
         var map = UnityEngine.Resources.Load<Map>("QuantumMap");
         var simulationConfig = UnityEngine.Resources.Load<SimulationConfig>("GameSimulationConfig");

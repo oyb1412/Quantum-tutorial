@@ -80,7 +80,7 @@ public unsafe class PlayerController : SystemMainThreadFilter<PlayerController.F
                 else
                     filter.Player->NotInputTimer += f.DeltaTime;
 
-                if (filter.Player->NotInputTimer >= 3) {
+                if (filter.Player->NotInputTimer >= 2) {
                     filter.Player->NotInputTimer = 0;
                     filter.Player->State = PlayerState.FreeMode;
                 }

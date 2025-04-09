@@ -2,6 +2,4 @@ global
 {
 	Int32 EnemyCount;
 	Int32 PlayerCount;
-	entity_ref PlayerList0;
-	entity_ref PlayerList1;
 }

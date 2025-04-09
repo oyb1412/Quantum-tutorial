@@ -37,16 +37,10 @@ public unsafe class EnemyController : SystemMainThreadFilter<EnemyController.Fil
     private void UpdateState(Frame f, ref Filter filter) {
         FP minDistanceSq = FP.UseableMax;
         filter.Enemy->TargetPlayerEntity = default;
-        for (int i = 0; i < f.Global->PlayerCount; i++) {
+        var players = f.Unsafe.GetComponentBlockIterator<PlayerComponent>();
 
-            switch (i) {
-                case 0:
-                    filter.Enemy->TargetPlayerEntity = f.Global->PlayerList0;
-                    break;
-                case 1:
-                    filter.Enemy->TargetPlayerEntity = f.Global->PlayerList1;
-                    break;
-            }
+        foreach (var player in players) {
+            filter.Enemy->TargetPlayerEntity = player.Entity;
 
             if (filter.Enemy->TargetPlayerEntity == default)
                 return;
@@ -102,9 +96,7 @@ public unsafe class EnemyController : SystemMainThreadFilter<EnemyController.Fil
             playerComp->KillCount++;
             Log.Debug($"현재 {playerComp->PlayerRef} 플레이어 킬 : {playerComp->KillCount}");
             f.Destroy(info.Entity);
-            EnemyManagerConfig config = f.FindAsset(f.RuntimeConfig.EnemyManagerConfig);
-            var prototype = config.EnemyPrototype;
-            f.Signals.SpawnsEnemy(prototype);
+            f.Signals.SpawnsEnemy();
         }
         
     }

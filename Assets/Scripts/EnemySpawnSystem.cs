@@ -15,11 +15,11 @@ public unsafe class EnemySpawnerSystem : SystemSignalsOnly, ISignalSpawnsEnemy {
         }
     }
 
-    public void SpawnsEnemy(Frame f, AssetRef<EntityPrototype> childPrototype) {
-        //애너미 에셋을 불러옴
-        EnemyManagerConfig config = f.FindAsset(f.RuntimeConfig.EnemyManagerConfig);
+    public void SpawnsEnemy(Frame f) {
+        EntityPrototype enemyPrototype = UnityEngine.Resources.Load<EntityPrototype>("Prefabs/EnemyEntityPrototype");
+
         //Config에 등록한 엔티티 프로토타입을 생성
-        EntityRef enemy = f.Create(childPrototype);
+        EntityRef enemy = f.Create(enemyPrototype);
         //해당 엔티티의 트랜스폼 정보를 불러옴
         Transform2D* enemyTransform = f.Unsafe.GetPointer<Transform2D>(enemy);
 
@@ -39,8 +39,7 @@ public unsafe class EnemySpawnerSystem : SystemSignalsOnly, ISignalSpawnsEnemy {
 
     private void SpawnEnemydWave(Frame f) {
         //Runner에 등록한 GameConfig를 찾아온다.
-        EntityPrototype enemyPrototype = UnityEngine.Resources.Load<EntityPrototype>("Prefabs/EnemyEntityPrototype");
-        SpawnsEnemy(f, enemyPrototype);
+        SpawnsEnemy(f);
     }
 
  
